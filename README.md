@@ -1,16 +1,13 @@
-# comida
+# Receitas
 
-Pratos de comida
+Projeto de aprendizado com objetivo de conhecer mais o flutter, desenvolvido com ajuda do curso da Udamy, com o professor Leonardo Moura Leitao.  
 
-## Getting Started
+[Leonardo Moura Leitao](https://www.udemy.com/user/leonardomouraleitao/)  
+[Aprenda Flutter e Desenvolva Apps Para Android e IOS](https://www.udemy.com/course/curso-flutter/)
 
-This project is a starting point for a Flutter application.
+## Jian Licio de Oliveira
+[Linkdin](https://www.udemy.com/user/leonardomouraleitao/)
+[Instagram](https://www.instagram.com/jian_licio/)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Versão do Flutter
+flutter 2.10.5
