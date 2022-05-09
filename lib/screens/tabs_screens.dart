@@ -1,11 +1,14 @@
-import 'package:comida/models/categoria.dart';
 import 'package:comida/screens/categorias_screen.dart';
 import 'package:comida/screens/favorite_screen.dart';
 import 'package:comida/utils/main_drawer.dart';
 import 'package:flutter/material.dart';
 
+import '../models/meal.dart';
+
 class TabsScreen extends StatefulWidget {
-  const TabsScreen({Key? key}) : super(key: key);
+  final List<Meal> favoriteMeals;
+
+  const TabsScreen({Key? key, required this.favoriteMeals}) : super(key: key);
 
   @override
   State<TabsScreen> createState() => _TabsScreenState();
@@ -19,10 +22,16 @@ class _TabsScreenState extends State<TabsScreen> {
     'Meus Favoritos',
   ];
 
-  final List<Widget> _screens = const [
-    CategoriaScreen(),
-    FavoriteScreen(),
-  ];
+  late List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      CategoriaScreen(),
+      FavoriteScreen(favoriteMeals: widget.favoriteMeals)
+    ];
+  }
 
   _selectScreen(int index) {
     setState(() {

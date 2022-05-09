@@ -1,10 +1,15 @@
-import 'dart:ffi';
-
 import 'package:comida/models/meal.dart';
 import 'package:flutter/material.dart';
 
 class MealDetalheScreen extends StatelessWidget {
-  const MealDetalheScreen({Key? key}) : super(key: key);
+  final Function(Meal) onToglleFavorite;
+  final bool Function(Meal) isFavorite;
+
+  const MealDetalheScreen({
+    Key? key,
+    required this.onToglleFavorite,
+    required this.isFavorite,
+  }) : super(key: key);
 
   _createSelectionTitle(BuildContext context, String title) {
     return Container(
@@ -88,9 +93,9 @@ class MealDetalheScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pop(meal.titulo);
+          onToglleFavorite(meal);
         },
-        child: const Icon(Icons.star),
+        child: Icon(isFavorite(meal) ? Icons.star : Icons.star_border),
       ),
     );
   }

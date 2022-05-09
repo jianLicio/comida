@@ -1,7 +1,6 @@
 import 'package:comida/data/dummy_data.dart';
 import 'package:comida/models/settings.dart';
 import 'package:comida/screens/categorias_meals_screen.dart';
-import 'package:comida/screens/categorias_screen.dart';
 import 'package:comida/screens/meal_detalhe_screen.dart';
 import 'package:comida/screens/settings_screen.dart';
 import 'package:comida/screens/tabs_screens.dart';
@@ -22,11 +21,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Meal> _comidasDisponiveis = dummyMeals;
+  Settings settings = Settings();
+
+  List<Meal> _favoriteMeals = [];
 
   void _filterMeals(Settings settings) {
     setState(() {
+      this.settings = settings;
       _comidasDisponiveis = dummyMeals.where((element) {
-        final filterGluten = settings.semGluttem && !element.semGluten!;
+        final filterGluten = settings.semGlutem && !element.semGluten!;
         final filterLactose = settings.semLactose && !element.semLactose!;
         final filterVegana = settings.vegano && !element.vegana!;
         final filterVegetariana = settings.vegetariano && !element.vegetariana!;
@@ -37,6 +40,18 @@ class _MyAppState extends State<MyApp> {
             !filterGluten);
       }).toList();
     });
+  }
+
+  void _toglleFavorite(Meal meal) {
+    setState(() {
+      _favoriteMeals.contains(meal)
+          ? _favoriteMeals.remove(meal)
+          : _favoriteMeals.add(meal);
+    });
+  }
+
+  bool _isFavorite(Meal meal) {
+    return _favoriteMeals.contains(meal);
   }
 
   @override
@@ -52,11 +67,13 @@ class _MyAppState extends State<MyApp> {
           ),
           textTheme: GoogleFonts.acmeTextTheme(Theme.of(context).textTheme)),
       routes: {
-        AppRoutes.home: (context) => const TabsScreen(),
+        AppRoutes.home: (context) => TabsScreen(favoriteMeals: _favoriteMeals),
         AppRoutes.categoriaMeals: (context) =>
             CategoriaMealsScreen(meals: _comidasDisponiveis),
-        AppRoutes.meal_detalhe: (context) => const MealDetalheScreen(),
-        AppRoutes.settings: (context) => const SettingsScreen(),
+        AppRoutes.mealDetalhe: (context) => MealDetalheScreen(
+            onToglleFavorite: _toglleFavorite, isFavorite: _isFavorite),
+        AppRoutes.settings: (context) =>
+            SettingsScreen(settings: settings, onSettingsChanged: _filterMeals),
       },
     );
   }

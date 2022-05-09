@@ -1,11 +1,11 @@
 class Settings {
-  late final bool semGluttem;
-  late final bool semLactose;
-  late final bool vegano;
-  late final bool vegetariano;
+  late bool semGlutem;
+  late bool semLactose;
+  late bool vegano;
+  late bool vegetariano;
 
   Settings({
-    this.semGluttem = false,
+    this.semGlutem = false,
     this.semLactose = false,
     this.vegano = false,
     this.vegetariano = false,

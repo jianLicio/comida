@@ -1,5 +1,4 @@
 import 'package:comida/componentes/meal_item.dart';
-import 'package:comida/data/dummy_data.dart';
 import 'package:comida/models/categoria.dart';
 import 'package:comida/models/meal.dart';
 import 'package:flutter/material.dart';

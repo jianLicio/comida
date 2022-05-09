@@ -4,15 +4,24 @@ import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
   final Function(Settings)? onSettingsChanged;
+  final Settings settings;
 
-  const SettingsScreen({Key? key, this.onSettingsChanged}) : super(key: key);
+  const SettingsScreen(
+      {Key? key, this.onSettingsChanged, required this.settings})
+      : super(key: key);
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  var settings = Settings();
+  late Settings settings;
+
+  @override
+  initState() {
+    super.initState();
+    settings = widget.settings;
+  }
 
   Widget _createSwitch(
     String titulo,
@@ -24,10 +33,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       title: Text(titulo),
       subtitle: Text(subtitulo),
       value: valor,
-      onChanged: (valor) {
-        onChanged(valor);
-        widget.onSettingsChanged!(settings);
-      },
+      onChanged: onChanged,
+      // onChanged: (valor) {
+      //   onChanged(valor);
+      //   widget.onSettingsChanged!(settings);
+      // },
     );
   }
 
@@ -49,8 +59,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _createSwitch(
                 'Sem Glutem',
                 'Só exibe  refeições sem glutem',
-                settings.semGluttem,
-                (value) => setState(() => settings.semGluttem = value),
+                settings.semGlutem,
+                (valor) => setState(() => settings.semGlutem = valor),
               ),
               _createSwitch(
                 'Sem Lactose',
